@@ -1,7 +1,7 @@
 # Import dependencies
 from flask import Flask, render_template, redirect, url_for
 from flask_pymongo import PyMongo
-import scraping
+import Mission_to_Mars_Challenge
 
 # Define Flask app
 app = Flask(__name__)
@@ -20,7 +20,7 @@ def index():
 @app.route("/scrape")
 def scrape():
    mars = mongo.db.mars
-   mars_data = scraping.scrape_all()
+   mars_data = Mission_to_Mars_Challenge.scrape_all()
    mars.update_one({}, {"$set": mars_data}, upsert = True)
    return redirect('/', code=302)
 
